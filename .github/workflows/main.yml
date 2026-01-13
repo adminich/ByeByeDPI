@@ -28,8 +28,14 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleRelease
     
+    - name: Find APK files
+      run: find . -name "*.apk" -type f | head -20
+    
     - uses: actions/upload-artifact@v4
       with:
-        name: app-release-apk
-        path: app/build/outputs/apk/release/app-release.apk
+        name: ByeByeDPI-APK
+        path: |
+          **/release/*.apk
+          **/*release*.apk
+          app/build/outputs/**/*.apk
         retention-days: 7
